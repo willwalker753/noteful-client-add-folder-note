@@ -1,11 +1,17 @@
-import React from 'react'
-import Note from '../Note/Note'
-import ApiContext from '../ApiContext'
-import { findNote } from '../notes-helpers'
-import axios from 'axios'
-import './NotePageMain.css'
+import React from 'react';
+import Note from '../Note/Note';
+import ApiContext from '../ApiContext';
+import axios from 'axios';
+import config from '../config';
+import './NotePageMain.css';
 
 export default class NotePageMain extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      noteRes: {id: 0, name: '', modified: '2020-09-17T23:24:51.635Z', content: ''}
+    };
+  }
   static defaultProps = {
     match: {
       params: {}
@@ -16,22 +22,20 @@ export default class NotePageMain extends React.Component {
   handleDeleteNote = noteId => {
     this.props.history.push(`/`)
   }
-  // async componentDidMount() {
-  //   try {
-  //     let response = await axios.get(`${config.API_ENDPOINT}/folders/${this.props.match.params.folderId}`);
-  //     response = response.data
-  //     this.setState({
-  //       folderRes: response
-  //     })
-  //   } 
-  //   catch (error) {
-  //     window.location.reload();
-  //   }
-  // }
+  async componentDidMount() {
+    try {
+      let response = await axios.get(`${config.API_ENDPOINT}/notes/${this.props.match.params.noteId}`);
+      response = response.data[0]
+      this.setState({
+        noteRes: response
+      })
+    } 
+    catch (error) {
+      window.location.reload();
+    }
+  }
   render() {
-    const { notes=[] } = this.context
-    const { noteId } = this.props.match.params
-    const note = findNote(notes, noteId) || { content: '' }
+    let note = this.state.noteRes;
     return (
       <section className='NotePageMain'>
         <Note

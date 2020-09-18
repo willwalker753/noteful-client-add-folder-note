@@ -1,13 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Note from '../Note/Note'
-import CircleButton from '../CircleButton/CircleButton'
-import ApiContext from '../ApiContext'
-import { getNotesForFolder } from '../notes-helpers'
-import axios from 'axios'
-import config from '../config'
-import './NoteListMain.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Note from '../Note/Note';
+import CircleButton from '../CircleButton/CircleButton';
+import ApiContext from '../ApiContext';
+import { getNotesForFolder } from '../notes-helpers';
+import axios from 'axios';
+import config from '../config';
+import './NoteListMain.css';
+
 export default class NoteListMain extends React.Component {
   constructor(props) {
     super(props);
@@ -28,13 +29,20 @@ export default class NoteListMain extends React.Component {
         this.setState({
           folderRes: response
         })
+        sessionStorage.setItem('folderId', this.props.match.params.folderId);
       } 
       catch (error) {
         window.location.reload();
       }
   }
-  componentDidUpdate() {
-    this.componentDidMount();
+  async componentDidUpdate() {
+    let folderId = sessionStorage.getItem('folderId');
+    if(this.props.match.params.folderId === undefined){
+    }
+    else if(folderId !== this.props.match.params.folderId){
+      this.componentDidMount();
+      sessionStorage.setItem('folderId', this.props.match.params.folderId);
+    }
   }
   render() {
     let { folderId } = 0;

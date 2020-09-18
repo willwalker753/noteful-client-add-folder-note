@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import NotefulForm from '../NotefulForm/NotefulForm'
-import ApiContext from '../ApiContext'
-import config from '../config'
-import './AddFolder.css'
+import React, { Component } from 'react';
+import NotefulForm from '../NotefulForm/NotefulForm';
+import ApiContext from '../ApiContext';
+import config from '../config';
+import './AddFolder.css';
 
 export default class AddFolder extends Component {
   static defaultProps = {

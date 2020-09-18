@@ -1,9 +1,9 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import CircleButton from '../CircleButton/CircleButton'
-import ApiContext from '../ApiContext'
-import { findNote, findFolder } from '../notes-helpers'
-import './NotePageNav.css'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CircleButton from '../CircleButton/CircleButton';
+import ApiContext from '../ApiContext';
+import { findNote, findFolder } from '../notes-helpers';
+import './NotePageNav.css';
 
 export default class NotePageNav extends React.Component {
   static defaultProps = {
@@ -20,9 +20,7 @@ export default class NotePageNav extends React.Component {
     const { notes, folders, } = this.context
     const { noteId } = this.props.match.params
     const note = findNote(notes, noteId) || {}
-    console.log(notes)
     const folder = findFolder(folders, note.folderId)
-    //console.log(`notes: ${notes}, folders: ${folders}, noteId: ${noteId}, folder: ${folder}`)
     return (
       <div className='NotePageNav'>
         <CircleButton

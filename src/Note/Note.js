@@ -1,10 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { format } from 'date-fns'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ApiContext from '../ApiContext'
-import config from '../config'
-import './Note.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ApiContext from '../ApiContext';
+import config from '../config';
+import './Note.css';
 
 export default class Note extends React.Component {
   static defaultProps ={
@@ -29,12 +29,12 @@ export default class Note extends React.Component {
       })
       .then(() => {
         this.context.deleteNote(noteId)
-        // allow parent to perform extra behaviour
         this.props.onDeleteNote(noteId)
       })
       .catch(error => {
         console.error({ error })
       })
+      //window.location.reload();
   }
 
   render() {
